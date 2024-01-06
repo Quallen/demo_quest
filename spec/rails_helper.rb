@@ -6,6 +6,10 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara'
+require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
+require 'capybara/apparition'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -42,6 +46,26 @@ RSpec.configure do |config|
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
+
+  Capybara.register_driver :apparition do |app|
+    browser_options = { 'disable-gpu': true }
+    Capybara::Apparition::Driver.new(app, headless: true,
+                                          screen_size: [1920,1080],
+                                          window_size: [1440,900],
+                                          browser_options: browser_options)
+  end
+
+  Capybara.javascript_driver = :apparition
+
+  Capybara::Screenshot.register_driver(:apparition, &:save_screenshot)
+
+  Capybara.configure do |config|
+    config.default_max_wait_time = 5 # seconds
+  end
+
+  config.before(:suite) do
+    Rails.application.load_seed
+  end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
