@@ -49,7 +49,9 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  # gem "debug", platforms: %i[ mri windows ]
+  gem 'rspec-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -63,3 +65,9 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'apparition', git: 'https://github.com/twalpole/apparition.git', ref: 'ca86be4d54af835d531dbcd2b86e7b2c77f85f34'
+  gem 'factory_bot_rails'
+end
