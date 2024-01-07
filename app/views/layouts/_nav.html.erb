@@ -1,0 +1,33 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src=<%= asset_path("brand.png") %> alt='Demo'>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        This
+      </a>
+      <a class="navbar-item">
+        That
+      </a>
+      <a class="navbar-item">
+        Other thing
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if current_user %>
+            <%= button_to('Logout', destroy_user_session_path, 'data-turbo': 'false', method: :delete, class: 'button is-danger') %>
+          <% else %>
+            <%= button_to "Log in", user_auth0_omniauth_authorize_path, 'data-turbo': 'false', method: :post, class: 'button is-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
