@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :characters
+
   devise :omniauthable, omniauth_providers: %i[auth0]
 
   def self.from_omniauth(auth)
