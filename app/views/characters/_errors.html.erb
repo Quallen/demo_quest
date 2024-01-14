@@ -1,0 +1,7 @@
+<% if character.errors.any? %>
+  <div class="message is-danger has-text-danger">
+    <% character.errors.full_messages.each do |message| %>
+      <li class="field-with-errors"><%= message %></li>
+    <% end %>
+  </div>
+<% end %>
