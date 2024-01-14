@@ -46,6 +46,7 @@ RSpec.configure do |config|
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 
   Capybara.register_driver :apparition do |app|
     browser_options = { 'disable-gpu': true }

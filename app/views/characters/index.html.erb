@@ -1,1 +1,23 @@
-Characters Index
+<div class="container has-background-info-light">
+
+  <div class="columns">
+    <div class="column">
+      <h1 class="is-size-3">Characters Index</h1>
+    </div>
+    <div class="column">
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <h2 class="is-size-4">Name</h2>
+    </div>
+    <div class="column is-one-quarter">
+      <h2 class="is-size-4">Status</h2>
+    </div>
+    <div class="column">
+    </div>
+  </div>
+
+  <%= render partial: 'character', collection: @characters, as: :character %>
+</div>
