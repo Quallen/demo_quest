@@ -3,6 +3,5 @@
     <div class="column"><%= link_to sanitize("&larr; Back to characters"), characters_path %></div>
   </div>
 
-  <%= render partial: 'form', locals: { character: @character, submit_text: "Create Character" } %>
-
+  <%= render partial: 'form', locals: { character: @character, submit_text: "Update Character" } %>
 </div>

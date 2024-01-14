@@ -1,0 +1,21 @@
+<%= form_with model: character, html: { class: "character form" } do |form| %>
+
+  <%= render partial: 'errors', locals: { character: character } %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender_identity %>
+    <%= form.text_field :gender_identity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.date_field  :date_of_birth %>
+  </div>
+
+  <%= form.submit submit_text, class: "button is-rounded is-primary" %>
+<% end %>

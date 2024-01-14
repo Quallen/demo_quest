@@ -29,3 +29,14 @@
 
 en:
   hello: "Hello world"
+
+  date:
+    formats:
+      default: '%m/%d/%y'
+      long_date: '%m/%d/%Y'
+
+  time:
+    formats:
+      default: '%d/%m/%Y %I:%M %p'
+      as_date: '%m/%d/%Y'
+      date_picker_value: '%Y-%m-%d'

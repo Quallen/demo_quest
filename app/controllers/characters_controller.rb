@@ -1,4 +1,6 @@
 class CharactersController < ApplicationController
+  before_action :character_load, only: [:show, :edit, :update]
+
   def index
     @characters = current_user.characters
   end
@@ -15,6 +17,24 @@ class CharactersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @character.update(character_params)
+      redirect_to characters_path, notice: "Character was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def character_load
+    @character = current_user.characters.find(params[:id])
   end
 
   def character_params
