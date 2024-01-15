@@ -93,7 +93,7 @@ feature "Characters", js: true do
           expect(page).to have_content character.name
           expect(page).to have_content character.present_status
           expect(page).to have_content character.gender_identity
-          expect(page).to have_content character.date_of_birth
+          expect(page).to have_content I18n.l(character.date_of_birth, format: :as_date)
         end
       end
 
@@ -102,7 +102,7 @@ feature "Characters", js: true do
 
         it 'displays when the character died' do
           visit character_path(character)
-          expect(page).to have_content character.deceased_at
+          expect(page).to have_content I18n.l(character.deceased_at, format: :as_date)
         end
       end
 

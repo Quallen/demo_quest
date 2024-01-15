@@ -6,8 +6,8 @@
   <p>Name: <%= @character.name %></p>
   <p>Status: <%= @character.present_status %></p>
   <p>Gender: <%= @character.gender_identity %></p>
-  <p>Birthday: <%= I18n.t(@character.date_of_birth, format: :as_date) %></p>
+  <p>Birthday: <%= I18n.l(@character.date_of_birth, format: :as_date) %></p>
   <% if @character.deceased? %>
-    <p>Birthday: <%= I18n.t(@character.deceased_at, format: :as_date) %></p>
+    <p>Birthday: <%= I18n.l(@character.deceased_at, format: :as_date) %></p>
   <% end %>
 </div>
