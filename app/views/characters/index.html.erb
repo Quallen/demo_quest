@@ -1,28 +1,25 @@
-<div class="container has-background-info-light">
-
-  <div class="columns">
-    <div class="column">
-      <h1 class="is-size-3">Characters Index</h1>
-    </div>
-    <div class="column">
-      <%= link_to "New character", new_character_path, class: "button is-primary" %>
-    </div>
+<div class="columns">
+  <div class="column">
+    <h1 class="is-size-3">Characters Index</h1>
   </div>
-
-  <div class="columns">
-    <div class="column is-one-quarter">
-      <h2 class="is-size-4">Name</h2>
-    </div>
-    <div class="column is-one-quarter">
-      <h2 class="is-size-4">Status</h2>
-    </div>
-    <div class="column is-one-quarter">
-      <h2 class="is-size-4">Show</h2>
-    </div>
-    <div class="column is-one-quarter">
-      <h2 class="is-size-4">Edit</h2>
-    </div>
+  <div class="column">
+    <%= link_to "New character", new_character_path, class: "button is-primary" %>
   </div>
-
-  <%= render partial: 'character', collection: @characters, as: :character %>
 </div>
+
+<div class="columns">
+  <div class="column is-one-quarter">
+    <h2 class="is-size-4">Name</h2>
+  </div>
+  <div class="column is-one-quarter">
+    <h2 class="is-size-4">Status</h2>
+  </div>
+  <div class="column is-one-quarter">
+    <h2 class="is-size-4">Show</h2>
+  </div>
+  <div class="column is-one-quarter">
+    <h2 class="is-size-4">Edit</h2>
+  </div>
+</div>
+
+<%= render partial: 'character', collection: @characters, as: :character %>
