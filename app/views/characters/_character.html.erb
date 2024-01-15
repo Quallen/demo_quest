@@ -1,14 +1,13 @@
-<div class="columns">
+<div class="columns is-centered">
   <div class="column is-one-quarter">
     <%= character.name %>
   </div>
   <div class="column is-one-quarter">
     <%= character.present_status %>
   </div>
-  <div class="column is-one-quarter">
-    <%= link_to "View", character_path(character), class: "button is-primary is-small" %>
-  </div>
-  <div class="column is-one-quarter">
+  <div class="column is-half is-narrow">
+    <%= link_to "View", character_path(character), class: "button is-primary is-small is-info" %>
     <%= link_to "Edit", edit_character_path(character), class: "button is-primary is-small" %>
+    <%= link_to "Delete", character_path(character), class: "button is-primary is-small is-danger", data: {turbo_method: :delete} %>
   </div>
 </div>

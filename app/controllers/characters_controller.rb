@@ -33,6 +33,14 @@ class CharactersController < ApplicationController
     end
   end
 
+  def destroy
+    @character = current_user.characters.find(params[:id])
+
+    @character.destroy
+
+    redirect_to characters_path, notice: "Character was successfully destroyed."
+  end
+
   def character_load
     @character = current_user.characters.find(params[:id])
   end

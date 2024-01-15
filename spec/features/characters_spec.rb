@@ -38,6 +38,10 @@ feature "Characters", js: true do
         it 'has a link to character edit' do
           expect(page).to have_link(href: edit_character_path(character))
         end
+
+        it 'has a link to delete the character' do
+          expect(page).to have_link('Delete', href: character_path(character)) { |link| link["data-turbo-method"] == "delete"}
+        end
       end
     end
 
@@ -65,6 +69,18 @@ feature "Characters", js: true do
         fill_in 'character_date_of_birth', with: '01/01/1970'
         click_button "Create Character"
         expect(page).to have_content "Character was successfully created."
+      end
+    end
+
+    describe 'deleting a character' do
+      let!(:character) { FactoryBot.create(:character, user: user, alive: true)}
+
+      it 'destroys the character' do
+        visit characters_path
+        expect(page).to have_content "Characters Index"
+        sleep 1
+        expect { click_link "Delete" }.to change { Character.count }.by(-1)
+        expect(page).to have_content "Character was successfully destroyed."
       end
     end
 
