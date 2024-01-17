@@ -17,5 +17,10 @@
     <%= form.date_field  :date_of_birth %>
   </div>
 
+  <div class="field">
+    <%= form.label :profession_id %>
+    <%= form.collection_select :profession_id, Profession.order(:name), :id, :name, {include_blank: 'Select a profession'} %>
+  </div>
+
   <%= form.submit submit_text, class: "button is-rounded is-primary" %>
 <% end %>

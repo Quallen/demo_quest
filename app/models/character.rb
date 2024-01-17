@@ -1,5 +1,6 @@
 class Character < ApplicationRecord
   belongs_to :user
+  belongs_to :profession, optional: true
 
   validates :name, presence: true
   validates :gender_identity, presence: true

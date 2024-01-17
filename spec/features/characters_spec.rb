@@ -46,6 +46,9 @@ feature "Characters", js: true do
     end
 
     describe 'creating a character' do
+      let!(:profession) { FactoryBot.create(:profession) }
+      let(:profession_name) { profession.name }
+
       describe 'validations' do
         before(:each) do
           visit new_character_path
@@ -67,6 +70,7 @@ feature "Characters", js: true do
         fill_in 'character_name', with: 'First Middle Last'
         fill_in 'character_gender_identity', with: 'agender'
         fill_in 'character_date_of_birth', with: '01/01/1970'
+        select profession_name, from: 'character_profession_id'
         click_button "Create Character"
         expect(page).to have_content "Character was successfully created."
       end
@@ -86,7 +90,8 @@ feature "Characters", js: true do
 
     describe 'show' do
       context 'given an alive character' do
-        let!(:character) { FactoryBot.create(:character, user: user, alive: true)}
+        let!(:profession) {FactoryBot.create(:profession)}
+        let!(:character) { FactoryBot.create(:character, user: user, alive: true, profession: profession)}
 
         it 'displays their character details' do
           visit character_path(character)
@@ -94,6 +99,7 @@ feature "Characters", js: true do
           expect(page).to have_content character.present_status
           expect(page).to have_content character.gender_identity
           expect(page).to have_content I18n.l(character.date_of_birth, format: :as_date)
+          expect(page).to have_content character.profession.name
         end
       end
 
@@ -124,19 +130,29 @@ feature "Characters", js: true do
       describe 'update' do
         context 'given an alive character' do
           let!(:character) { FactoryBot.create(:character, user: user, alive: true)}
-          context 'given an alive character' do
-            let!(:character) { FactoryBot.create(:character, user: user, alive: true)}
-            let(:new_name) { 'A New Name' }
-            let(:new_gender) { 'agender' }
+          let(:new_name) { 'A New Name' }
+          let(:new_gender) { 'agender' }
 
-            it 'allows the user to edit character details' do
+          it 'allows the user to edit character details' do
+            visit edit_character_path(character)
+            fill_in 'character_name', with: new_name
+            fill_in 'character_gender_identity', with: new_gender
+            click_button "Update Character"
+            expect(page).to have_content "Character was successfully updated."
+            expect(character.reload.name).to eq new_name
+            expect(character.gender_identity).to eq new_gender
+          end
+
+          context 'without a profession' do
+            let!(:new_profession) { FactoryBot.create(:profession) }
+            let(:new_profession_name) { new_profession.name }
+
+            it 'allows a profession to be saved' do
               visit edit_character_path(character)
-              fill_in 'character_name', with: new_name
-              fill_in 'character_gender_identity', with: new_gender
+              select new_profession_name, from: 'character_profession_id'
               click_button "Update Character"
               expect(page).to have_content "Character was successfully updated."
-              expect(character.reload.name).to eq new_name
-              expect(character.gender_identity).to eq new_gender
+              expect(character.reload.profession).to eq new_profession
             end
           end
         end

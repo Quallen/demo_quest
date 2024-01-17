@@ -5,6 +5,7 @@ FactoryBot.define do
     name { 'First Last' }
     gender_identity { 'Male' }
     date_of_birth { 30.years.ago }
+    association :profession, strategy: :null
 
     trait :deceased do
       alive { false }
